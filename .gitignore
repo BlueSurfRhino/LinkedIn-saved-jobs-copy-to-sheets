@@ -1,0 +1,5 @@
+.DS_Store
+creds.json
+env
+rocreds.py
+__pycache__
