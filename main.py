@@ -6,6 +6,17 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
 from rocreds import *
 
+def applyToAmazon(url):
+    driver = webdriver.Chrome()
+    driver.get(url)
+    amznBtn = driver.find_element_by_class_name('apply-button__offsite-apply-icon')
+    amznBtn.click()
+    applyNowBtn = driver.find_elements_by_partial_link_text('Apply')
+    for x in applyNowBtn:
+        x.click()
+    #applyNowBtn.click()
+    print(url)
+
 def main():
     LINKEDIN_LOGIN_URL = 'https://www.linkedin.com/login'
     LINKEDIN_SAVED_JOBS_URL = 'https://www.linkedin.com/my-items/saved-jobs/?cardType=SAVED'
@@ -55,6 +66,8 @@ def main():
             # add row to end of sheet
             ws.append_row(reportLine,value_input_option='USER_ENTERED')
             print(reportLine)
+            # if reportLine[1] == 'Amazon':
+            #     applyToAmazon(reportLine[3])
         buttons = driver.find_elements_by_class_name('artdeco-pagination__button')
         for x in buttons:
             if x.text  == 'Next' and not x.is_enabled():
