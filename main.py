@@ -69,6 +69,8 @@ def main():
             # if reportLine[1] == 'Amazon':
             #     applyToAmazon(reportLine[3])
         buttons = driver.find_elements_by_class_name('artdeco-pagination__button')
+        if len(buttons) == 0:
+            keepLooking = False
         for x in buttons:
             if x.text  == 'Next' and not x.is_enabled():
                 keepLooking = False
